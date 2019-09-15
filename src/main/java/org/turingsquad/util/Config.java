@@ -21,6 +21,7 @@ public class Config {
     private final String url;
 
     public static final Config INSTANCE = init();
+    private static final String DEFAULT_RESOURCE_FILE = "client.properties";
 
     private Config(String filePath) {
         Properties properties = new Properties();
@@ -28,10 +29,11 @@ public class Config {
             properties.load(stream);
         } catch (Exception e) {
             log.error("Failed to load client properties. {}", e.getMessage());
+            throw new RuntimeException("Could not load config from " + filePath);
         }
         protocol = properties.getProperty("protocol");
         serverName = properties.getProperty("serverName");
-        port = Integer.parseInt("port");
+        port = Integer.parseInt(properties.getProperty("port"));
         username = properties.getProperty("username");
         password = properties.getProperty("password");
         serverType = ServerType.valueOf(properties.getProperty("serverType"));
@@ -50,7 +52,7 @@ public class Config {
     private static Config init() {
         String filePath = System.getProperty("configFile");
         if(filePath == null) {
-            return new Config("client.properties");
+            return new Config(Config.class.getClassLoader().getResource(DEFAULT_RESOURCE_FILE).getFile());
         }
         return new Config(filePath);
     }
