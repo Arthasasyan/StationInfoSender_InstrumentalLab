@@ -43,7 +43,7 @@ public class Config {
     public Sender getSender() {
         switch (serverType) {
             case ATSD:
-                return new AtsdSender(url, username, password);
+                return new AtsdSender(url + "/api/v1", username, password);
             default:
                 throw  new RuntimeException("Cannot get sender for " + serverType);
         }
