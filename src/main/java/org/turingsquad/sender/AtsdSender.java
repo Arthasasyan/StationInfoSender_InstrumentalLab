@@ -24,14 +24,7 @@ public class AtsdSender implements Sender {
     @Override
     public boolean send(List<StationData> dataList) {
         final List<AddSeriesCommand> seriesList = dataList.stream()
-                .map(data -> {
-                    AddSeriesCommand series = new AddSeriesCommand();
-                    series.setMetricName("temperature");
-                    series.setEntityName(data.getName());
-                    Sample sample = Sample.ofTimeDouble(data.getEpochDate(), data.getTemperature());
-                    series.addSeries(sample);
-                    return series;
-                })
+                .map(this::toCommand)
                 .collect(Collectors.toList());
         for(AddSeriesCommand command: seriesList) {
             boolean inserted = atsdDataService.addSeries(command);
@@ -41,5 +34,14 @@ public class AtsdSender implements Sender {
             }
         }
         return true;
+    }
+
+    private AddSeriesCommand toCommand(StationData data) {
+        AddSeriesCommand series = new AddSeriesCommand();
+        series.setMetricName("temperature");
+        series.setEntityName(data.getName());
+        Sample sample = Sample.ofTimeDouble(data.getEpochDate(), data.getTemperature());
+        series.addSeries(sample);
+        return series;
     }
 }

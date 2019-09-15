@@ -8,6 +8,7 @@ import java.util.List;
 @AllArgsConstructor
 public abstract class StationDataReaderFromFile {
     protected final String fileName;
+    protected boolean prepared;
 
     public abstract List<StationData> read();
     public abstract void init() throws IOException;

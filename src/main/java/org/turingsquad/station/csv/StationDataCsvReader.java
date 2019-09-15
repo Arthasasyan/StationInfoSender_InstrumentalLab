@@ -17,11 +17,14 @@ public class StationDataCsvReader extends StationDataReaderFromFile {
     private CSVParser parser;
 
     public StationDataCsvReader(String fileName) {
-        super(fileName);
+        super(fileName, false);
     }
 
     @Override
     public List<StationData> read() {
+        if(!prepared) {
+            throw new RuntimeException("Reader for " + fileName + " not prepared");
+        }
         List<StationData> resultList = new ArrayList<>();
         for (CSVRecord record : parser) {
             int temperature = Integer.parseInt(record.get("temperature"));
@@ -35,5 +38,6 @@ public class StationDataCsvReader extends StationDataReaderFromFile {
     public void init() throws IOException {
         parser = new CSVParser(new FileReader(fileName), CSVFormat.DEFAULT.withHeader());
         log.info("Initiated csv parser for " + fileName);
+        prepared = true;
     }
 }

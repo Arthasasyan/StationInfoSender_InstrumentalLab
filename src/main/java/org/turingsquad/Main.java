@@ -1,11 +1,18 @@
 package org.turingsquad;
 
 import lombok.extern.slf4j.Slf4j;
+import org.turingsquad.sender.Sender;
+import org.turingsquad.station.StationData;
+import org.turingsquad.station.StationDataReaderFromFile;
+import org.turingsquad.station.csv.StationDataCsvReader;
+import org.turingsquad.util.Config;
+
+import java.util.List;
 
 @Slf4j
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         String fileName;
         if(args.length == 0) {
             log.info("No args provided");
@@ -13,6 +20,10 @@ public class Main {
         } else {
             fileName = args[0];
         }
-        log.info("File name: " + fileName);
+        Sender sender = Config.INSTANCE.getSender();
+        StationDataReaderFromFile reader = new StationDataCsvReader(fileName);
+        reader.init();
+        List<StationData> stationDataList = reader.read();
+        sender.send(stationDataList);
     }
 }
