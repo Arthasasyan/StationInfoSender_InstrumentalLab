@@ -29,15 +29,16 @@ public class StationDataCsvReader extends StationDataReaderFromFile {
         for (CSVRecord record : parser) {
             int temperature = Integer.parseInt(record.get("temperature").trim());
             long epochMillis = Long.parseLong(record.get("epochMillis").trim());
-            resultList.add(new StationData(record.get("name"), temperature, epochMillis));
+            resultList.add(new StationData(record.get("name").trim(), temperature, epochMillis));
         }
         return resultList;
     }
 
     @Override
-    public void init() throws IOException {
+    public StationDataReaderFromFile init() throws IOException {
         parser = new CSVParser(new FileReader(fileName), CSVFormat.DEFAULT.withHeader());
         log.info("Initiated csv parser for " + fileName);
         prepared = true;
+        return this;
     }
 }
