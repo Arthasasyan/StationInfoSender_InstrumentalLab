@@ -11,5 +11,5 @@ public abstract class StationDataReaderFromFile {
     protected boolean prepared;
 
     public abstract List<StationData> read();
-    public abstract void init() throws IOException;
+    public abstract StationDataReaderFromFile init() throws IOException;
 }
