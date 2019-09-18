@@ -29,4 +29,5 @@ At the moment the only supported `serverType` is [`ATSD`](https://github.com/axi
 
 ## Contributing
 Please, write your commit titles in **English**
+
 For test use [`mock.properties`](https://github.com/Arthasasyan/StationInfoSender_InstrumentalLab/blob/master/src/test/resources/mock.properties) file
