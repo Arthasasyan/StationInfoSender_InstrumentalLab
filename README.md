@@ -1,4 +1,5 @@
 # StationInfoSender_InstrumentalLab
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6b6b201958304a31b254eba3bb09385b)](https://www.codacy.com/manual/Arthasasyan/StationInfoSender_InstrumentalLab?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Arthasasyan/StationInfoSender_InstrumentalLab&amp;utm_campaign=Badge_Grade)
 
 This program is a study project for ITMO University.
 
