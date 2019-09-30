@@ -1,0 +1,6 @@
+[submodule "INIParser_OOP3"]
+	path = INIParser_OOP3
+	url = https://github.com/Arthasasyan/INIParser_OOP3
+[submodule "XmlAnnotations_OOP5"]
+	path = XmlAnnotations_OOP5
+	url = https://github.com/Arthasasyan/XmlAnnotations_OOP5
