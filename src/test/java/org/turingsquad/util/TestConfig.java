@@ -24,10 +24,27 @@ public class TestConfig {
             log.error("Failed to load mock properties. {}", e.getMessage());
             throw new RuntimeException("Could not load config from " + filePath);
         }
-        atsdUrl = properties.getProperty("atsd.url");
-        atsdUserName = properties.getProperty("atsd.username");
-        atsdPassword = properties.getProperty("atsd.password");
+        atsdUrl = load("atsd.url", properties, "http://localhost:8088");
+        atsdUserName = load("atsd.username", properties, "axibase");
+        atsdPassword = load("atsd.password", properties, "password");
     }
+
+    private static String load(String name, Properties clientProperties, String defaultValue) {
+        String value = System.getProperty(name);
+        if (value == null) {
+            value = clientProperties.getProperty(name);
+            if (value == null) {
+                if (defaultValue == null) {
+                    log.error("Could not find required property: {}", name);
+                    throw new IllegalStateException(name + " property is null");
+                } else {
+                    value = defaultValue;
+                }
+            }
+        }
+        return value;
+    }
+
 
     private static final String DEFAULT_RESOURCE_FILE = "mock.properties";
 
