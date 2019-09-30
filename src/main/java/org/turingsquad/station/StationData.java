@@ -7,6 +7,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class StationData {
     private final String name;
-    private final int temperature;
+    private final double temperature;
     private final long epochDate;
 }

@@ -26,14 +26,15 @@ public class AtsdSender implements Sender {
         final List<AddSeriesCommand> seriesList = dataList.stream()
                 .map(this::toCommand)
                 .collect(Collectors.toList());
+        boolean result = true;
         for(AddSeriesCommand command: seriesList) {
             boolean inserted = atsdDataService.addSeries(command);
             if(!inserted) {
                 log.warn("Failed to insert command in ATSD");
-                return false;
+                result = false;
             }
         }
-        return true;
+        return result;
     }
 
     private AddSeriesCommand toCommand(StationData data) {

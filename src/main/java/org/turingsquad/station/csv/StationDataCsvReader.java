@@ -27,7 +27,7 @@ public class StationDataCsvReader extends StationDataReaderFromFile {
         }
         List<StationData> resultList = new ArrayList<>();
         for (CSVRecord record : parser) {
-            int temperature = Integer.parseInt(record.get("temperature").trim());
+            double temperature = Double.parseDouble(record.get("temperature").trim());
             long epochMillis = Long.parseLong(record.get("epochMillis").trim());
             resultList.add(new StationData(record.get("name").trim(), temperature, epochMillis));
         }
