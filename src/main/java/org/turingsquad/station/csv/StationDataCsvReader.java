@@ -23,6 +23,7 @@ public class StationDataCsvReader extends StationDataReaderFromFile {
     @Override
     public List<StationData> read() {
         if(!prepared) {
+            log.warn("CSV parser not prepared for " + fileName);
             throw new RuntimeException("Reader for " + fileName + " not prepared");
         }
         List<StationData> resultList = new ArrayList<>();
