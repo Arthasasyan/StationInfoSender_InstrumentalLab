@@ -25,5 +25,6 @@ public class Main {
         reader.init();
         List<StationData> stationDataList = reader.read();
         sender.send(stationDataList);
+        log.info("All data successfully sent to {}", Config.INSTANCE.getServerType());
     }
 }
